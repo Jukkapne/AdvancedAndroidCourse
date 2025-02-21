@@ -2,7 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt) // Apply Hilt plugin from version catalog
     id("com.google.gms.google-services")
+    alias(libs.plugins.kapt) // Added to enable kapt for Hilt
+
 }
 
 android {
@@ -60,6 +63,10 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-
+}
+kapt {
+    correctErrorTypes = true // Ensures better error messages from Hilt
 }
